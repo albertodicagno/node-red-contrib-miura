@@ -14,7 +14,7 @@ module.exports = function (RED) {
                     case 'getStatus':
                         request.get('http://' + config.hostname + '/status.xml', {
                             'auth': {
-                                'user': consig.username,
+                                'user': config.username,
                                 'pass': config.pincode,
                                 'sendImmediately': false
                             }
