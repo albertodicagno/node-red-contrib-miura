@@ -1,5 +1,5 @@
 {
-    "name": "node-red-contrib-ethercat",
+    "name": "node-red-contrib-miura",
     "version": "0.0.1",
     "description": "Modulo per il controllo della centrale di allarme Tervis Miura, con modulo LAN",
     "dependencies": {
