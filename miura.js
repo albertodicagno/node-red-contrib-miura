@@ -12,6 +12,7 @@ module.exports = function (RED) {
                 let command = msg_in.payload.command
                 switch (command) {
                     case 'getStatus':
+                        this.status({ fill: "green", shape: "ring", text: "Richiesta in corso..." })
                         request.get('http://' + config.hostname + ':' + config.port + '/status.xml', {
                             'auth': {
                                 'user': config.username,
@@ -20,10 +21,18 @@ module.exports = function (RED) {
                             }
                         }, function (err, res) {
                             if (!err) {
-                                msg.payload = res.body
-                                node.send(msg)
+                                if (res.statusCode == 200) {
+                                    this.status({ fill: "green", shape: "dot", text: "Richiesta completata." });
+                                    msg.payload = res.body
+                                    node.send(msg)
+                                } else if (res.statusCode == 401) {
+                                    this.status({ fill: "red", shape: "ring", text: "Nome utente o pin errato." });
+                                } else {
+                                    this.status({ fill: "red", shape: "ring", text: "Errore. Codice HTTP " + res.statusCode.toString() + "." });
+                                }
                             } else {
                                 node.error("HTTP request error", err);
+                                this.status({ fill: "red", shape: "ring", text: "Errore richiesta." });
                             }
                         })
                         break;
