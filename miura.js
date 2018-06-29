@@ -15,8 +15,8 @@ module.exports = function (RED) {
                         this.status({ fill: "green", shape: "ring", text: "Richiesta in corso..." })
                         request.get('http://' + config.hostname + ':' + config.port + '/status.xml', {
                             'auth': {
-                                'user': config.username,
-                                'pass': config.pincode,
+                                'user': this.credentials.username,
+                                'pass': this.credentials.pincode,
                                 'sendImmediately': false
                             }
                         }, function (err, res) {
@@ -43,5 +43,10 @@ module.exports = function (RED) {
             }
         });
     }
-    RED.nodes.registerType("miura", MiuraNode);
+    RED.nodes.registerType("miura", MiuraNode, {
+        credentials: {
+            username: { type: "text" },
+            pincode: { type: "password" }
+        }
+    });
 }
