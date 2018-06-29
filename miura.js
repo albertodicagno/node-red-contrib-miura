@@ -1,5 +1,5 @@
 const xml2js = require('xml2js')
-const http = require('http')
+const request = require('request')
 const parser = new xml2js.Parser()
 
 module.exports = function (RED) {
@@ -7,20 +7,21 @@ module.exports = function (RED) {
         RED.nodes.createNode(this, config);
         var node = this;
         node.on('input', function (msg_in) {
-            if (msg_in.payload && msg_in.payload != {}) {
+            if (msg_in.payload && msg_in.payload.command) {
                 let msg = {}
-                let command = msg_in.command
+                let command = msg_in.payload.command
                 switch (command) {
                     case 'getStatus':
-                        http.get({
-                            hostname: '192.168.5.250',
-                            port: 5400,
-                            path: '/status.xml',
-                            agent: false  // create a new agent just for this one request
-                        }, (res) => {
-                            msg.payload = msg.payload.toLowerCase()
-                            node.send(res);
+                        request.get('http://' + config.hostname + '/status.xml', {
+                            'auth': {
+                                'user': consig.username,
+                                'pass': config.pincode,
+                                'sendImmediately': false
+                            }
                         });
+                        break;
+                    default:
+                        node.error("Command " + ((command.length > 0) ? (command + " ") : "") + "not recognized.");
                         break;
                 }
             }

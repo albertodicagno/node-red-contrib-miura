@@ -3,7 +3,7 @@
         category: 'function',
         color: '#a6bbcf',
         defaults: {
-            name: { value: "" }
+            //name: { value: "" }
         },
         inputs: 1,
         outputs: 1,
@@ -14,10 +14,18 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="lower-case">
+<script type="text/x-red" data-template-name="miura">
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Miura</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <label for="node-input-hostname">Nome host/IP centrale</label>
+        <input type="text" id="node-input-hostname" placeholder="192.168.5.250">
+    </div>
+    <div class="form-row">
+        <label for="node-input-hostname">Nome utente</label>
+        <input type="text" id="node-input-username">
+    </div>
+    <div class="form-row">
+        <label for="node-input-hostname">Codice PIN utente</label>
+        <input type="password" id="node-input-pincode">
     </div>
 </script>
 
