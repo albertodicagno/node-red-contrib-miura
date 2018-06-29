@@ -14,7 +14,7 @@
     ],
     "node-red": {
         "nodes": {
-            "lower-case": "miura.js"
+            "miura": "miura.js"
         }
     }
 }
