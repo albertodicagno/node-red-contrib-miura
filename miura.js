@@ -22,17 +22,17 @@ module.exports = function (RED) {
                         }, function (err, res) {
                             if (!err) {
                                 if (res.statusCode == 200) {
-                                    this.status({ fill: "green", shape: "dot", text: "Richiesta completata." });
+                                    node.status({ fill: "green", shape: "dot", text: "Richiesta completata." });
                                     msg.payload = res.body
                                     node.send(msg)
                                 } else if (res.statusCode == 401) {
-                                    this.status({ fill: "red", shape: "ring", text: "Nome utente o pin errato." });
+                                    node.status({ fill: "red", shape: "ring", text: "Nome utente o pin errato." });
                                 } else {
-                                    this.status({ fill: "red", shape: "ring", text: "Errore. Codice HTTP " + res.statusCode.toString() + "." });
+                                    node.status({ fill: "red", shape: "ring", text: "Errore. Codice HTTP " + res.statusCode.toString() + "." });
                                 }
                             } else {
                                 node.error("HTTP request error", err);
-                                this.status({ fill: "red", shape: "ring", text: "Errore richiesta." });
+                                node.status({ fill: "red", shape: "ring", text: "Errore richiesta." });
                             }
                         })
                         break;
