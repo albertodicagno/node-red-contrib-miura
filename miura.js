@@ -18,7 +18,14 @@ module.exports = function (RED) {
                                 'pass': config.pincode,
                                 'sendImmediately': false
                             }
-                        });
+                        }, function (err, res) {
+                            if (!err) {
+                                msg.payload = res.body
+                                node.send(msg)
+                            } else {
+                                node.error("HTTP request error", err);
+                            }
+                        })
                         break;
                     default:
                         node.error("Command " + ((command.length > 0) ? (command + " ") : "") + "not recognized.");
