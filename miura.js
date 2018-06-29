@@ -12,7 +12,7 @@ module.exports = function (RED) {
                 let command = msg_in.payload.command
                 switch (command) {
                     case 'getStatus':
-                        request.get('http://' + config.hostname + '/status.xml', {
+                        request.get('http://' + config.hostname + ':' + config.port + '/status.xml', {
                             'auth': {
                                 'user': config.username,
                                 'pass': config.pincode,

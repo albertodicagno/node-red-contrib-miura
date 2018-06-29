@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "description": "Modulo per il controllo della centrale di allarme Tervis Miura, con modulo LAN",
     "dependencies": {
+        "request": "^2.87.0",
         "xml2js": "^0.4.19"
     },
     "keywords": [
