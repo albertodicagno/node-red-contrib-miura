@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('miura', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "icons/icon.png",
+        label: function () {
+            return this.name || "miura";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="lower-case">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Miura</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="lower-case">
+    <p>Modulo che consente di controllare la centrale Tervis Miura con Node-RED.</p>
+</script>
